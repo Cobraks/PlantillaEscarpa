@@ -1,0 +1,2636 @@
+
+html, body {
+  overscroll-behavior-y: contain;
+}
+
+img {
+  width: 100%;
+  max-width: 100%;
+  display: block;
+  height: auto;
+}
+
+
+.wrapper-padding {
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+}
+
+/* Estilos para la barra de scroll en navegadores basados en WebKit */
+aside.buscador::-webkit-scrollbar {
+  width: 12px;
+}
+
+aside.buscador::-webkit-scrollbar-track {
+  background-color: var(--neutral50);
+  border-radius: 10px;
+}
+
+aside.buscador::-webkit-scrollbar-thumb {
+  background-color: var(--primary40);
+  border-radius: 10px;
+}
+
+/* Estilos para evitar el scroll en el body */
+.no-scroll {
+  overflow: hidden;
+  touch-action: none; 
+}
+
+/* Estilos para el aside en pantallas pequeñas */
+
+  aside.buscador {
+      position: fixed;
+      bottom: -100%;
+      left: 0;
+      width: 100%;
+      height: calc(100% - 15.2rem);
+    /*  height: calc(100% - (var(--altura-barraInferior) + var(--altura-header)));*/
+      height: calc(100% - var(--altura-barraInferior));
+      overflow-y: auto;
+      z-index: 100;
+      transition: all 0.3s ease-in-out;
+      color: var(--primary10);
+      overflow: hidden;
+  }
+
+  
+aside.buscador::after {
+  content: '';
+  width: 100%;
+   position: sticky;
+  bottom: 0;
+  z-index: 99999;
+  display: flex;
+  background-image: linear-gradient(to bottom, hsla(285, 100%, 99.2%, 0), hsl(285, 100%, 99.2%));
+  height: 7rem;
+  border-radius: 2rem;
+}
+
+
+  aside.buscador .wrapper-buscador {
+    padding-left: 4rem;
+    padding-right: 1.6rem;
+    /*border: solid var(--neutral-variant80); */
+    background: var(--light-surface);
+  height: 100%;
+
+  background: var(--neutral90);
+  background: var(--neutral95);
+  }
+
+  aside.buscador.cargando {
+    opacity: .8;
+    filter: blur(.1rem);
+  }
+
+  aside.buscador .wrapper-buscador .contenido-buscador::-webkit-scrollbar {
+    width: .8rem;
+    border-radius: 2.4rem;
+    background: var(--neutral50);
+    -webkit-border-radius: 2.4rem;
+    -moz-border-radius: 2.4rem;
+    -ms-border-radius: 2.4rem;
+    -o-border-radius: 2.4rem;
+  }
+
+
+  aside.buscador .wrapper-buscador .contenido-buscador::-webkit-scrollbar-thumb {
+    background: var(--primary50);
+    border-radius: 2.4rem;
+}
+
+aside.buscador .wrapper-buscador .contenido-buscador::-webkit-scrollbar-track {
+  background: var(--neutral50);
+  border-radius: 2.4rem;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  margin-top: 1.6rem;
+  margin-bottom: 1.6rem;
+}
+
+  aside.buscador .wrapper-buscador .contenido-buscador {
+    /*border: solid; */
+    padding: 1rem;
+    overflow-y: scroll;
+    height: 100%;
+    overflow-x: hidden;
+  }
+
+
+  /* Estilos para el aside cuando está visible */
+  aside.buscador.visible {
+    bottom: var(--altura-barraInferior);
+  }
+
+  .logged-in aside.buscador {
+    height: calc(100% - 19.8rem);
+  /*  height: calc(100% - (var(--altura-barraInferior) + var(--altura-WpAdminBaryHeader)));*/
+  height: calc(100% - (var(--altura-barraInferior) + var(--altura-WpAdminBar))); 
+  }
+  
+  .logged-in aside.buscador.scrolled_logged-in {
+   /* height: calc(100% - 15.2rem);
+    height: calc(100% - (var(--altura-barraInferior) + var(--altura-header))); */
+    height: calc(100vh - (var(--altura-barraInferior) ));
+  }
+
+/*Estilos elementos del buscador */
+aside.buscador h3.marca {
+  margin-top: 0;
+    margin-bottom: 0;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+aside.buscador .ayuda-marcas {
+  font-size: 2.4rem;
+  vertical-align: middle;
+  font-weight: 400;
+  cursor: pointer;
+  margin-left: .4rem;
+  display: inline-flex;
+  justify-content: end;
+  flex: 1;
+}
+
+aside.buscador .help-marcas {
+  display: none;
+  padding: 1rem;
+  margin-top: .8rem;
+  background-color: var(--light-on-primary-container);
+  border-radius: .5rem;
+  font-size: 1.4rem;
+  color: var(--light-on-primary);
+  -webkit-border-radius: .5rem;
+  -moz-border-radius: .5rem;
+  -ms-border-radius: .5rem;
+  -o-border-radius: .5rem;
+}
+
+aside.buscador .p-multi-marca {
+  font-size: 1.4rem;
+  color: var(--neutral-variant30);
+    margin-bottom: 0.4rem;
+    margin-top: 4rem;
+}
+
+
+  .wrapper-cerrar-buscador {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    padding-top: 1.6rem;
+    padding-right: 1.6rem;
+    z-index: 9;
+    margin-bottom: 2.4rem;
+
+  }
+
+  .boton-cierre {
+    color: #fff; 
+    font-size: 1.6rem; 
+    background-color: #333; 
+    border-radius: 50%;    width: 4rem;     height: 4rem;    line-height: 4rem;     text-align: center;     box-shadow: 0 .2px 4px rgba(0,0,0,0.2); 
+    border: none;
+    position: relative;
+  }
+
+  .boton-cierre:before {
+    content: '\e937';
+    font-family: 'icons_plantilla360';
+    font-size: 2.4rem;
+}
+
+.boton-cierre span {
+  display: none;
+  position: absolute; /* bottom: -2.4rem; /* Posicionar el span debajo del botón */ 
+ top: calc(100% + 0.8rem);
+ font-size: 1.4rem;
+  left: 50%;   transform: translateX(-50%);  white-space: nowrap;
+  background-color: #333;
+  color: #fff;
+  padding: 0 .8rem;
+  border-radius: .4rem;
+}
+
+.boton-cierre:hover span {
+  display: block;
+}
+
+.boton-cierre span:before {
+  content: '';
+  position: absolute;
+  top: -5px; 
+  left: 50%;
+  transform: translateX(-50%);
+  border-style: solid; 
+  border-width: 0 5px 5px; 
+  border-color: transparent transparent #333;
+}
+
+/*Buscador*/
+.search-container{
+  display: none;
+}
+
+
+
+.facetwp-facet {
+margin-bottom: 0 !important;
+  display: flex;
+  flex-wrap: wrap;
+  /*margin: -0.4rem;*/
+}
+
+.facetwp-facet.selected .noUi-connect,
+.facetwp-facet.selected .noUi-handle
+ {
+  background: var(--primary60) !important;
+  background: var(--primary40) !important;
+}
+.facetwp-facet.selected .noUi-horizontal .noUi-tooltip {
+color: var(--primary40) !important;
+font-size: 1.5rem !important;
+}
+
+.facetwp-facet-marcas.facetwp-type-checkboxes {
+  display: inline;
+
+}
+
+/*Estilos facetwp*/
+.facetwp-checkbox,
+.select-marcas .selected-option,.facetwp-slider-reset
+ {
+  display: flex;
+  background: var(--neutral-variant99)!important;
+  height: 3.2rem;
+  width: -moz-fit-content;
+  width: fit-content;
+
+  align-items: center;
+  padding: .6rem 1.2rem !important;
+  margin-bottom: 0 !important;
+  border: solid 1px var(--neutral-variant80);
+  -o-border-radius: 0.8rem;
+  -ms-border-radius: 0.8rem;
+  -moz-border-radius: 0.8rem;
+  -webkit-border-radius: 0.8rem;
+  border-radius: 0.8rem;
+  
+  border-color: var(--neutral-variant60);
+ 
+  color: var(--neutral-variant20);
+  vertical-align: middle;
+  font-size: 1.4rem;
+
+}
+
+.facetwp-slider-reset {
+  font-family: var(--ff-primary);
+  margin-left: .4rem;
+}
+  /*
+  align-items: center;
+  justify-content: center;
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+  background: var(--primary10);
+  color: var(--primary90);
+  margin-left: 0;
+  border: none;
+  height:  3.2rem;
+  border-radius: .4rem;
+  font-family: var(--ff-primary);
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-bottom: .8rem;
+  -webkit-border-radius: .4rem;
+  -moz-border-radius: .4rem;
+  -ms-border-radius: .4rem;
+  -o-border-radius: .4rem; */
+
+
+.facetwp-checkbox:hover,
+ .select-marcas .selected-option:hover {
+  cursor: pointer;
+
+}
+
+.facetwp-overflow {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.facetwp-facet-marcas .facetwp-overflow.facetwp-hidden {
+  display: none;
+}
+
+.facetwp-facet-marcas .facetwp-overflow {
+  display: inline;
+}
+
+.facetwp-checkbox {
+  margin: 0.4rem !important;
+}
+
+.facetwp-facet-marcas .facetwp-checkbox {
+  display: inline-flex;
+  cursor: pointer;
+  transition: all .5s ease-out;
+  border: solid var(--neutral-variant70) 1px;
+  color: var(--neutral-variant30);
+}
+/*
+.facetwp-facet-marcas .facetwp-checkbox::before,
+.facetwp-facet-marcas .facetwp-checkbox::after{
+  content:'';
+  width: 1.2rem; 
+} */
+
+.facetwp-checkbox:hover {
+  background: var(--primary80) !important;
+  color: var(--primary40) !important;
+
+  border: solid var(--primary70) 1px !important;
+  transition: all .3s ease-in;
+
+}
+
+
+.facetwp-checkbox.checked {
+
+  padding-left: .8rem !important;
+  color: var(--primary95) !important;
+  border: solid var(--primary20) 1px !important;
+  transition: all .3s ease-in;
+  background: var(--primary40) !important;
+  font-weight: 500;
+}
+
+.facetwp-checkbox.checked:hover {
+  background: var(--primary80) !important;
+  color: var(--primary40) !important;
+  transition: all .3s ease-in;
+  border: solid var(--primary70) 1px !important;
+}
+
+.facetwp-facet-marcas .facetwp-checkbox.checked::before{
+ padding-left: 0;
+}
+
+
+.facetwp-counter {
+  width: 1.6rem;
+height: 1.6rem;
+border-radius: 50%;
+background-color: var(--primary70);
+color: var(--primary95);
+font-size: .9rem;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+
+.facetwp-counter.ocultar {
+  display: none;
+}
+
+
+.facetwp-checkbox.checked::before {
+  content: '\e930';
+  margin-right: 0.8rem;
+  font-family: 'icons_plantilla360' ;
+  font-size: 2rem;
+  display: inline-block;
+}
+
+.facetwp-checkbox.checked:hover::before {
+  content: '\e937';
+}
+
+
+.is-loading .facetwp-checkbox::before
+ {
+  /* content: '\e97d' ;
+  font-family: 'icons_plantilla360' ; */
+}
+
+.facetwp-slider-wrap {
+  width: 100%;
+}
+
+/* Sustitución de hoja de estilos extra*/
+.facetwp-facet.is-loading {
+  opacity: 0.6;
+}
+
+.facetwp-overlay {
+  position: absolute;
+}
+
+.facetwp-page {
+
+  cursor: pointer;
+}
+
+/* Checkboxes */
+
+.facetwp-type-checkboxes .facetwp-depth {
+  display: none;
+}
+
+.facetwp-type-checkboxes .facetwp-depth.visible {
+  display: inherit;
+}
+
+.facetwp-checkbox.disabled,
+.facetwp-radio.disabled {
+    opacity: 0.4;
+    cursor: default;
+}
+
+
+.facetwp-link {
+  cursor: pointer;
+}
+
+
+
+.facetwp-toggle {
+  cursor: pointer;
+}
+
+.facetwp-hidden {
+  display: none;
+}
+/*Fin sustitución*/
+
+
+
+
+
+
+
+
+
+/* Replace `.ordenar_coches` with the name of your sort facet */
+/*.facetwp-facet-ordenar_coches select {
+  display: none;
+  } */
+
+/* Estilos para el contenedor del elemento personalizado */
+.select-marcas {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Estilos para la opción seleccionada */
+.select-marcas .selected-option {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  width: 100%;
+  cursor: pointer;
+  padding-right: 0.8rem !important;
+  height: 4.2rem;
+
+  border-color: var(--primary5);
+  margin-top: 1rem;
+  transition: all .4s ease-out;
+  -webkit-transition: all .4s ease-out;
+  -moz-transition: all .4s ease-out;
+  -ms-transition: all .4s ease-out;
+  -o-transition: all .4s ease-out;
+  background: var(--neutral-variant99) !important;
+  border-color: var(--neutral-variant60);
+}
+
+.select-marcas .selected-option.active {
+  background: white !important;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+  -moz-transition: all .3s ease-in;
+  -ms-transition: all .3s ease-in;
+  -o-transition: all .3s ease-in;
+}
+
+.select-marcas .selected-option span {
+  width: 100%;
+}
+.select-marcas .selected-option::after {
+  content: "\e946";
+  font-family: 'icons_plantilla360' !important;
+  margin-left: .2rem;
+  font-size: 1.8rem;
+  color: var(--primary35);
+  transform: rotate(0);
+}
+
+.select-marcas .selected-option.active::after {
+  transform: rotate(180deg);
+}
+
+/* Estilos para la lista de opciones */
+.select-marcas .options-list {
+  display: none;
+  position: relative;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid #ccc;
+  background: white;
+  /*height: fit-content;*/
+  flex-wrap: wrap;
+  padding-top: 1.6rem;
+  padding-bottom: 1.6rem;
+  border-color: var(--primary5);
+  border-bottom-left-radius: .8rem;
+  border-bottom-right-radius: .8rem;
+  border-top: 0;
+}
+
+.select-marcas .options-list li {
+  display: flex;
+  font-size: 1.4rem;
+  width: 33%;
+  justify-content: end;
+  align-items: end;
+}
+
+.select-marcas .options-list li.seleccionado {
+  font-weight: bold;
+  background: var(--primary50);
+}
+.select-marcas .options-list li.todas_las_marcas {
+  width: 100%;
+    border: solid 1px var(--primary50);
+    height: 4.6rem;
+    display: flex;
+    align-items: center;
+    border-radius: .8rem;
+}
+
+.select-marcas .options-list li:hover {
+  background-color: #eee;
+}
+
+.select-marcas .options-list li a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+ 
+}
+
+.select-marcas .options-list li img {
+  width: 3rem;
+  /*height: 3rem;*/
+  margin-bottom: 0.4rem;
+}
+
+.select-marcas .options-list li img.circular {
+  width: 4.2rem;
+ /* height: 4.2rem;*/
+}
+
+.select-marcas .options-list li img.horizontal {
+  width: 5.4rem;
+ /* height: 4.8rem;*/
+}
+
+.select-marcas .options-list li img.vertical {
+  width: 5.4rem;
+  height: 4.8rem;
+}
+
+.select-marcas .selected-option img {
+  width: 4rem;
+}
+
+.select-marcas .selected-option img.ocultar_logo {
+  display: none;
+}
+
+/* Estilos para la lista de opciones cuando está abierta */
+.select-marcas.open .options-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+
+
+/*Estilos filtros*/
+.h3-wrapper-filtros {
+  margin-top: 4rem;
+  /*color: var(--primary30); */
+  width: 100%;
+}
+
+.h3-wrapper-filtros h3 {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0;
+}
+
+.h3-wrapper-filtros i {
+  font-size: 2.4rem;
+  margin-right: .8rem;
+  color: var(--primary10);
+}
+
+.facetwp-toggle {
+  width: 100%;
+  margin: 0;
+  margin-top: 1.6rem;
+  /*height: 3.2rem;
+  padding: .6rem 1.2rem !important;
+  margin-bottom: 0 !important;
+  border: solid 1px red;
+  border-radius: 0.8rem;*/
+  
+  font-size: 1.4rem;
+  color: var(--primary40);
+  text-decoration: underline;
+}
+
+.facetwp-facet-marcas .facetwp-toggle {
+  display: block;
+}
+
+.facetwp-facet-marcas .facetwp-toggle.facetwp-hidden {
+  display: none;
+}
+
+
+
+
+/* Barra inferior */
+.barra-filtros,
+.barra-filtros-inside {
+  bottom: 0;
+  height: var(--altura-barraInferior);
+  background: var(--neutral60);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transition: transform 0.3s ease-in-out;
+  transform-origin: bottom;
+}
+
+.barra-filtros.visible,
+.barra-filtros-inside.visible {
+  background: var(--primary20);
+}
+
+.barra-filtros {
+  position: sticky;
+  z-index: 999;
+  transition: all .2s ease-in;
+  bottom: 0; /*Si lo soporta, safe-area*/
+}
+
+
+/*
+@supports (bottom: env(safe-area-inset-bottom)) {
+  .barra-filtros {
+    bottom: env(safe-area-inset-bottom); 
+    bottom: 0; /*comprobar iphone, y quitar
+  }
+
+  .orientation-landscape .barra-filtros {
+   /* bottom: 0;
+  }
+}
+*/
+
+
+.orientation-landscape .barra-filtros {
+  height: 100%;
+  width: 10rem;
+  background: blue;
+  flex-direction: column;
+bottom: 0;
+transition: all .2s ease-in;
+ position: fixed;
+}
+
+
+.orientation-landscape .barra-filtros::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10rem;
+  height: 100%;
+  background: blue;
+  z-index: -1;
+} 
+
+
+.borrar-filtros.fixed-bottom {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* Estilos para el botón de filtros */
+
+
+.barra-filtros button {
+  border: none;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  background: transparent;
+  color: var(--primary10);
+}
+
+.barra-filtros button i {
+  font-size: 2.4rem;
+  border-radius: 3.2rem;
+  -webkit-border-radius: 3.2rem;
+  -moz-border-radius: 3.2rem;
+  -ms-border-radius: 3.2rem;
+  -o-border-radius: 3.2rem;
+  width: 6.4rem;
+  height: 3.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .2s ease-out;
+  -webkit-transition: all .2s ease-out;
+  -moz-transition: all .2s ease-out;
+  -ms-transition: all .2s ease-out;
+  -o-transition: all .2s ease-out;
+  margin-bottom: .4rem;
+ 
+}
+
+
+.barra-filtros button.active i {
+  background: var(--primary70);
+  color: var(--primary40);
+  transition: all .3s ease-in;
+  -webkit-transition: all .3s ease-in;
+  -moz-transition: all .3s ease-in;
+  -ms-transition: all .3s ease-in;
+  -o-transition: all .3s ease-in;
+}
+
+
+
+.barra-filtros button .label {
+    transition: color .3s ease-out;
+    font-size: 1.4rem;
+    line-height: 1.6rem;
+    letter-spacing: 0.05rem;
+    font-weight: 400;
+    font-family: var(--ff-primary);
+}
+
+.barra-filtros button.active .label {
+  color: white;
+  font-weight: 500;
+}
+
+.ver_coches_container {
+  position: fixed;
+  bottom: 8rem;
+  width: 100%;
+  padding-bottom: 1.6rem;
+  display: flex;
+  justify-content: center;
+  display: none;
+}
+
+.ver_coches_container.visible {
+  display: flex;
+  z-index: 10;
+}
+
+.ver_coches_container.bottom8 {
+bottom: 8rem;
+}
+
+#ver_coches,
+.facetwp-reset {
+
+  /*font-size: 1.4rem;*/
+  font-weight: bold;
+  color: #007bff;
+  background-color: white;
+  padding: 1.2rem 2.4rem;
+  border-radius: 2.4rem;
+  border: none;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  cursor: pointer;
+  height: 4rem;
+  transition: all .2s ease-out;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+
+.facetwp-reset {
+margin-right: 1.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: .8rem;
+    background: var(--primary10);
+    color: var(--primary90);
+    padding-right: 1.6rem;
+    margin-left: 0;
+    font-family: var(--ff-primary);
+    font-weight: 500;
+}
+
+
+
+.facetwp-reset .contador_filtros {
+  background: #e10f28;
+  width: 2.4rem;
+  height: 2.4rem;
+  font-size: 1.4rem;
+  color: white;
+  margin-left: 0.8rem;
+
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: normal;
+}
+
+.facetwp-reset::before {
+  content: '\e94f';
+    font-family: 'icons_plantilla360' !important;
+    margin-right: .8rem;
+    font-weight: normal;
+    font-size: 2rem;
+    color: white;
+    transform: rotate(0);
+}
+
+/* noUi styles*/
+
+.facetwp-slider-label{
+  color: var(--secondary);
+    width: 100%;
+    font-size: 1.4rem;
+    
+  }
+  
+  /*Estilos Noui*/
+  .slider-styled,
+  .slider-styled .noUi-handle {
+      box-shadow: none;
+  }
+  
+  /* Hide markers on slider handles */
+  .slider-styled .noUi-handle::before,
+  .slider-styled .noUi-handle::after {
+      display: none;
+  }
+  
+  .noUi-target {
+    padding: 0 3.2rem !important;
+    border: none !important;
+    height: .4rem !important;
+    border-radius: .4rem !important;
+    /*background: var(--neutral-variant90) !important;*/
+    background: var(--neutral70) !important;
+  }
+  
+  .noUi-handle {
+    border: none !important;
+    border-radius: 50% !important;
+    background: var(--primary60) !important;
+    top: -0.8rem !important;
+    width: 2rem !important;
+    height: 2rem !important;
+  right: 1.6rem;
+  transition: all .4s ease-out;
+  background: var(--neutral40) !important;
+  }
+
+  .noUi-handle.noUi-active  {
+background: var(--primary70) !important;
+transition: all .2s ease-in;
+  }
+  
+  
+  .noUi-handle::after {
+    content: '';
+    width: 4rem;
+    height: 4rem;
+    background: transparent;
+    opacity: .0;
+    display: block;
+    border-radius: 50%;
+    position: absolute;
+    top: -1rem;
+    /* left: 0; */
+    left: -1rem;
+    transition: all .2s ease-out;
+    cursor: pointer;
+  } 
+  .noUi-handle:active::after {
+    transition: all .1s ease-in;
+    content: '';
+    width: 4rem;
+    opacity: .5;
+    height: 4rem;
+    background: var(--primary70);
+    opacity: .5;
+    display: block;
+    border-radius: 50%;
+    position: absolute;
+    top: -1rem;
+    /* left: 0; */
+    left: -1rem;
+  } 
+  
+  .noUi-connect {
+    background: var(--neutral-variant30)  !important;
+    background: var(--primary60) !important;
+    background: var(--neutral40) !important;
+  }
+  
+  .noUi-horizontal .noUi-tooltip {
+    background: var(--neutral-variant99) !important;
+    color: var(--primary50) !important;
+    border-radius: .4rem !important;
+  bottom: -4rem !important;
+    font-size: 1.4rem !important;
+    padding: 1.6rem;
+      border: none !important;
+      z-index: 9 !important;
+      margin: 0;
+      font-weight: bold;
+      background: transparent !important;
+      color: var(--neutral40) !important;
+  }
+  
+  .noUi-tooltip::before {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -.8rem;
+    width: 0;
+    height: 0;
+    border-bottom: solid 0.8rem var(--neutral-variant99);
+    border-left: solid .8rem transparent;
+    border-right: solid .8rem transparent;
+    display: none;
+  }
+  
+  .facetwp-slider-label {
+    display:none !important;
+  }
+  
+  .facetwp-slider-wrap {
+      padding-bottom: 5.6rem !important;
+      padding-top: 0;
+      padding-bottom: 4rem !important;
+  }
+  
+  
+  #slider-hide .noUi-tooltip {
+    display: none;
+  }
+  #slider-hide .noUi-active .noUi-tooltip {
+    display: block;
+  }
+
+
+  /*Si solo hay 1 año*/
+.facetwp-facet-ano.disabled,
+.facetwp-facet-kilometros.disabled,
+.facetwp-facet-potencia.disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+  
+  /*
+  .noUi-target {
+    border: none !important;
+    background: var(--neutral-80) !important;
+    height:.4rem !important
+  }
+  
+  .noUi-connect {
+    background: var(--secondary) !important;
+  }
+  
+  .noUi-connects{
+    width: 95% !important;
+    margin: 0 auto !important;
+  }
+  .noUi-handle {
+    border: none !important;
+    background: var(--secondary) !important;
+    height: 1.6rem !important;
+    width: 1.6rem !important;
+    border-radius: 3.2rem !important;
+    
+  }
+  
+  .noUi-horizontal .noUi-handle {
+    top: -0.72rem !important;
+  }
+  
+  .facetwp-slider-wrap {
+    padding-bottom: .8rem !important;
+    margin-top: 1.6rem;
+      margin-bottom: .8rem;
+  }
+  
+  .noUi-handle-upper{
+    
+    right: 0.8rem !important;
+  }
+  
+  .noUi-handle-lower{
+    right: -2.4rem !important;
+  }
+  
+  
+  */
+/*Fin noUi styles*/
+
+#ver_coches:hover  {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  transition: all .2s ease-in;
+}
+
+#ver_coches:active {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+/* Animación del círculo giratorio */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Estilos para el elemento SVG */
+.loading-animation {
+  width: 100%;
+  height: 100%;
+  animation: spin 1s linear infinite;
+}
+
+/* Estilos para el círculo */
+.loading-animation circle {
+  stroke-dasharray: 150;
+  stroke-dashoffset: 0;
+  animation: dash 1.5s ease-in-out infinite;
+}
+
+/* Animación para el trazo del círculo */
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dashoffset: -75;
+    stroke-dasharray: 150;
+  }
+  to {
+    stroke-dashoffset: -150;
+    stroke-dasharray: 150;
+  }
+}
+
+.mas_filtros_container {
+  display: none;
+}
+
+button.mas_filtros {
+  border-radius: 20px;
+  border: none;
+  padding: 12px 25px;
+  background-color: #4CAF50;
+  color: white;
+  font-family: Arial;
+  font-size: 18px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+button.mas_filtros:hover {
+    background-color: white; 
+    color: black; 
+    border: 2px solid #4CAF50;
+}
+
+
+/*Tarjetas coches */
+
+.section-listado-coches .intro {
+  padding: var(--wrapper-padding);
+  padding-bottom: 0;
+  color: var(--neutral20);
+  color:  var(--primary40); 
+  
+}
+
+.texto-elegidos {
+  font-size: 3.2rem;
+  display: block;
+}
+.texto-elegidos.invisible {
+  
+  display: none;
+}
+
+.section-listado-coches .tenemos,
+.section-listado-coches .contador,
+.section-listado-coches .contador .facetwp-facet {
+  display: inline;
+}
+.section-listado-coches .intro h1 {
+  margin: 0;
+  display: inline;
+  font-weight: bold;
+}
+
+
+.section-listado-coches .intro .texto-stock {
+  
+}
+
+.section-listado-coches p.introduccion {
+  margin-bottom: 0 !important;
+  color: var(--neutral30);
+}
+
+.section-listado-coches .contenedor-coches {
+  padding: var(--espacioPadding);
+  /*background: var(--neutral90); */
+  padding: var(--wrapper-padding);
+  padding-bottom: var(--tarjetaMargin);
+}
+
+.section-listado-coches .leer-facet {
+  padding-left: var(--interior-grid);
+  padding-right: var(--wrapper-padding);
+  align-content: end;
+  justify-content: center;
+  width: 100%;
+  display: flex;
+  margin-bottom: 2.4rem;
+}
+
+/*Estilos y animaciones contador*/
+
+
+
+.contador {
+  transition: all .2s ease-in;
+}
+
+.contador.efecto_blur {
+  filter: blur(3px);
+  opacity: .5;
+ 
+    /* Aplicar una transformación de escala */
+    
+    /* Suavizar la transición entre estados */
+    transition: all 0.3s ease-out;
+    
+}
+
+
+
+
+
+.coche-card {
+   width: 100%;
+   /*Moderno*//*overflow: hidden;
+   */
+   margin-bottom: var(--tarjetaMargin);
+   border-radius: 1.6rem;
+   max-width: 40rem;
+   margin-left: auto;
+   margin-right: auto;
+   filter: blur(0);
+   /*TarjetaseparadaOpcionmoderna*/
+   background: var(--neutral98);
+   opacity: 1;
+   box-shadow: 0 2px 4px var(--neutral-variant80);
+   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+   transition: all .1s ease-in;
+   -webkit-transition: all .1s ease-in;
+   -moz-transition: all .1s ease-in;
+   -ms-transition: all .1s ease-in;
+   -o-transition: all .1s ease-in;
+   display: flex;
+  flex-direction: column;
+}
+
+
+.coche-card .caca {
+  /*margin-top: var(--espacioTarjeta); 
+  
+  background: var(--primary98);
+  border-radius: 1.6rem;
+  border-top-left-radius: .8rem;
+  border-top-right-radius: .8rem;
+  box-shadow: 0 2px 4px var(--neutral90);*/
+}
+
+.coche-card.cargando {
+  filter: blur(.5rem);
+  box-shadow: none !important;
+  transform: scale(.96);
+  opacity: 6;
+  -moz-transform: scale(.96);
+  -ms-transform: scale(.96);
+  -o-transform: scale(.96);
+  transition: all .3s ease-out;
+  -webkit-transition: all .3s ease-out;
+  -moz-transition: all .3s ease-out;
+  -ms-transition: all .3s ease-out;
+  -o-transition: all .3s ease-out;
+  -webkit-filter: blur(.2rem);
+  -webkit-transform: scale(.96);
+}
+
+.coche-card.cargado {
+  transition: all .1s ease-out;
+  filter: blur(0);
+  -webkit-transition: all .1s ease-out;
+  -moz-transition: all .1s ease-out;
+  -ms-transition: all .1s ease-out;
+  -o-transition: all .1s ease-out;
+  opacity: 1;
+}
+
+
+@keyframes impulso {
+  0% {
+    transform: scale(1); 
+    
+  }
+  30% {
+    transform: scale(0.95);
+    -webkit-transform: scale(0.95);
+    -moz-transform: scale(0.95);
+    -ms-transform: scale(0.95);
+    -o-transform: scale(0.95);
+}
+  100% {
+    transform: scale(1.02);
+    -webkit-transform: scale(1.02);
+    -moz-transform: scale(1.02);
+    -ms-transform: scale(1.02);
+    -o-transform: scale(1.02);
+
+}
+}
+
+.coche-card.cargado:hover {
+    /*animation: impulso .3s ease-in forwards;
+    *//*box-shadow:  0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+    */box-shadow: 0 0 4em 0px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 .8rem 2.4rem -.4rem rgba(0, 0, 0, 0.15);
+    transform: scale(1.024);
+    transition: all .1s ease-in;
+    -webkit-transform: scale(1.024);
+    -moz-transform: scale(1.024);
+    -ms-transform: scale(1.024);
+    -o-transform: scale(1.024);
+    -webkit-transition: all .1s ease-in;
+    -moz-transition: all .1s ease-in;
+    -ms-transition: all .1s ease-in;
+    -o-transition: all .1s ease-in;
+    background: white;
+   /* z-index: 9999999999999; */
+}
+
+
+.coche-card.hover-en-otro {
+   transition: all .6s ease-out;
+   -webkit-transition: all .6s ease-out;
+   -moz-transition: all .6s ease-out;
+   -ms-transition: all .6s ease-out;
+   -o-transition: all .6s ease-out;
+   /*opacity: .8; 
+   box-shadow: none; */
+   filter: blur(.10rem);
+   -webkit-filter: blur(.10rem);
+ 
+}
+
+ .coche-card a.link-coche,
+.coche-card:visited,
+.coche-card:hover,
+.coche-card:active {
+  text-decoration: none;
+  color: inherit;
+}
+
+.coche-card a.link-coche {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.coche-card .portada-container {
+  position: relative;
+  /*Moderno*/
+  max-height: 200px;
+  width: 100%;
+        border-radius: 1.6rem;
+    -webkit-border-radius: 1.6rem;
+    -moz-border-radius: 1.6rem;
+    -ms-border-radius: 1.6rem;
+    -o-border-radius: 1.6rem;
+}
+
+  .coche-card:hover .portada-container,
+  .coche-card:hover .portada_principal_coche {
+  
+}
+
+.coche-card .portada_principal_coche {
+ /*Conestilomoderno*/max-height: 200px;
+ transform: scale(1);
+ object-fit: cover;
+ border-radius: 1.6rem;
+ -webkit-transform: scale(1);
+ -moz-transform: scale(1);
+ -ms-transform: scale(1);
+ -o-transform: scale(1);
+ transition: all .03s ease-out;
+ -webkit-transition: all .03s ease-out;
+ -moz-transition: all .03s ease-out;
+ -ms-transition: all .03s ease-out;
+ -o-transition: all .03s ease-out;
+}
+.coche-card:hover .portada_principal_coche {
+  transform: scale(1.02);
+  transition: all .08s ease-in;
+  -webkit-transition: all .08s ease-in;
+  -moz-transition: all .08s ease-in;
+  -ms-transition: all .08s ease-in;
+  -o-transition: all .08s ease-in;
+  -webkit-transform: scale(1.02);
+  -moz-transform: scale(1.02);
+  -ms-transform: scale(1.02);
+  -o-transform: scale(1.02);
+  /*position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  */
+}
+.coche-card .caca .portada_principal_coche {
+  /* border-top-left-radius: 1.6rem;
+  border-top-right-radius: 1.6rem;
+  border-bottom-left-radius: .8rem;
+  border-bottom-right-radius: .8rem; */
+}
+
+.coche-card img.portada_coche {
+  width: 100%;
+  display: block;
+}
+
+.coche-card .overlay-etiqueta_medioambiental {
+  position: absolute;
+  top: 1.6rem;
+  right: 1.6rem;
+  height: 4.8rem;
+  width: 4.8rem;
+}
+
+.coche-card .overlay {
+  position: absolute;
+  background: var(--primary98);
+  font-size: 1.4rem;
+  border-radius: 1.6rem;
+  color: var(--primary35);
+  padding-left: .6rem;
+  padding-right: .8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: .2rem;
+  padding-bottom: .2rem;
+  height: 2.4rem;
+}
+
+.coche-card .overlay.fotos {
+  left: var(--espacioTarjeta);
+  bottom: var(--espacioTarjeta);
+}
+
+.coche-card .overlay.iva-deducible {
+  right: var(--espacioTarjeta);
+  bottom: var(--espacioTarjeta);
+  background: var(--atc-primary);
+  color: var(--primary98);
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+  font-weight: medium;
+}
+
+
+
+.overlay i {
+  margin-right: .4rem;
+  font-size: 2rem;
+  color: var(--primary25);
+}
+
+.coche-card .header-card {
+  display: flex;
+  align-items: center;
+padding:var(--espacioTarjeta);
+}
+
+.coche-card .logo-marca {
+      /*width: 5.4rem;
+      height: fit-content;
+      */width: 100%;
+      height: 100%;
+
+}
+
+.coche-card .logo-container {
+  display: flex;
+  min-height: 4.2rem;
+}
+
+.coche-card .logo-container.circular {
+  flex: 0 0 5rem;
+}
+
+.coche-card .logo-container.horizontal {
+  flex: 0 0 6.6rem;
+  align-self: flex-start;
+  padding-top: 0.5rem;
+}
+
+.coche-card .logo-container.horizontal_largo {
+  flex: 0 0 5.8rem;
+  align-self: flex-start;
+    /*padding-top: 1.2rem; */
+}
+
+.coche-card .logo-container.vertical {
+  flex: 0 0 5.2rem;
+}
+
+.coche-card .logo-container.vertical_largo {
+  flex: 0 0 3.6rem;
+}
+
+.coche-card .titulo-coche-card {
+  flex-grow: 1;
+  margin-left: 1rem;
+  margin-right: 1.4rem;
+  align-self: flex-start;
+}
+
+.coche-card h2 {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+
+.coche-card .text-precio,
+.coche-card .cantidad {
+  /*color: hsl(244.7, 100%, 50%); */
+}
+
+.coche-card .marca-modelo,
+.coche-card .cantidad {
+  
+  font-weight: 600;
+}
+
+.coche-card .cantidad {
+
+ 
+  
+}
+
+.coche-card .financiado .cantidad {
+  font-weight: 500;
+}
+
+.coche-card .version{
+  padding-top: .4rem; 
+}
+
+.coche-card .version,
+.coche-card .text-precio {
+  font-size: 1.4rem;
+  font-weight: normal;
+  display: block;
+}
+
+.coche-card .cantidad .symbol {
+  padding-left: .2rem;
+  font-weight: normal;
+
+}
+
+
+
+.coche-card .precio-card {
+    /* Para precio en imagen */
+ /* text-align: center;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-self: start;
+  width: fit-content;
+
+  position: absolute;
+  padding: 1.6rem;
+  background: #1400ff;
+  border-radius: 50%;
+  background: white;
+  border-radius: 1.4rem;
+  right: var(--espacioTarjeta);
+  bottom: -2.4rem;
+  padding-top: .6rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-top-right-radius: 1.4rem;
+  border-top-left-radius: 1.4rem;
+  padding-bottom: 0; */
+
+}
+
+.coche-card .precio-card {
+  /* Para precio en footer (Pero lo cambiamos de pòsición en html) */
+  
+  
+  /* margin-block-start: 0.83em;
+    margin-block-end: 0.83em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px; */
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    /*align-items: flex-start; */
+    margin: 0;
+    /*padding: .8rem 1.6rem; */
+    padding: 0;
+    /*background: var(--neutral95); */
+    border-radius: .8rem;
+   /* color: var(--neutral50); */
+    align-self: start;
+    justify-content: end;
+    align-items: end;
+    color: var(--atc-primary);
+  }
+
+.coche-card .precio-card-container.mostrar-financiado {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: calc(var(--espacioTarjeta) / 2);
+  display: none;
+}
+
+.coche-card .precio-card.financiado {
+  /*background: var(--primary90); */
+  color: var(--primary30);
+
+  align-items: end;
+}
+
+
+
+.coche-card .info-card {
+
+}
+
+.coche-card .info-card ul {
+  padding: var(--espacioTarjeta);
+  padding-top: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: calc(var(--espacioTarjeta) / 2);
+}
+
+.coche-card .info-card ul li:nth-child(3n+1) {
+  text-align: left;
+  border-right: 0.16rem solid var(--neutral90);
+}
+
+.coche-card .info-card ul li:nth-child(3n+2) {
+  justify-content: center;
+}
+
+.coche-card .info-card ul li:nth-child(3n+3) {
+  justify-content: end;
+  border-left: 0.16rem solid var(--neutral90);
+}
+
+.coche-card .info-card li {
+  background-color: #e0e0e0;
+  padding: .4rem 1.2rem;
+ /* margin-right: .8rem;
+  margin-bottom: 1.2rem; */
+  display: flex;
+  justify-content: flex-start; /* Cambiado de center a flex-start */
+  align-items: center;
+  font-size: 1.4rem;
+  height: 3.2rem;
+  border-radius: 1.6rem;
+  -webkit-border-radius: 1.6rem;
+  -moz-border-radius: 1.6rem;
+  -ms-border-radius: 1.6rem;
+  -o-border-radius: 1.6rem;
+  background: #e5edff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+/*Sin fondo*/
+border-radius: 0;
+  padding: 0;
+  background: transparent;
+}
+
+.coche-card .info-card li i {
+  margin-right: .4rem;
+  font-size: 2.4rem;
+}
+
+@keyframes desplazamiento {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-100%); }
+}
+
+.coche-card .info-card li.deslizamiento div {
+  display: flex;
+  overflow: hidden;
+  /*
+  -webkit-mask-image: linear-gradient(to left, black 85%, transparent);
+  mask-image: linear-gradient(to left, black 85%, transparent);
+*/
+  
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 80%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 15%, black 80%, transparent);
+
+  
+
+}
+
+.coche-card .info-card li.deslizamiento div span {
+  display: inline-block;
+  padding-right: 1.6rem;
+  position: relative;
+  animation: desplazamiento 3s linear infinite;
+}
+
+
+
+
+.coche-card .info-card li.desplazamiento {
+ 
+  /* background-color: red; */
+  }
+  /*
+  .coche-card .info-card li.desplazamiento:after{
+    content: '';
+    display: inline-block;
+    width: 12px;
+    background:rgba(0, 128, 0, 0.422);
+  } */
+  
+  /*
+  @keyframes desplazamiento {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-20px); } /* Aumentado el valor de -12px a -20px }*/
+  
+  /*
+  .coche-card .info-card li.desplazamiento span {
+    position: relative;
+    animation: desplazamiento 1s linear infinite;
+  
+  } */
+
+.coche-card .wrapper-admin-control {
+  padding: var(--espacioTarjeta);
+  display: flex;
+  padding-top: 0;
+}
+
+@keyframes pulse {
+  0% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.1);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
+
+.coche-card .contador-mensajes {
+  top: -2.4rem;
+  width: 4.8rem;
+  height: 4.8rem;
+  font-size: 1.6rem;
+  font-weight: bold;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--atc-primary);
+  color: white;
+  flex-direction: column;
+  min-height: 4.8rem;
+  min-width: 4.8rem;
+  padding: 1.6rem;
+
+}
+
+.coche-card .contador-mensajes i {
+  font-size: 2rem;
+  font-weight: normal;
+  animation: pulse .5s infinite;
+  -webkit-animation: pulse .5s infinite;
+  color: var(--primary90);
+}
+
+.coche-card .boton-editar-coche {
+flex-grow: 1;
+}
+
+.coche-card .boton-editar-coche a.button {
+  background: var(--primary98);
+  border: solid;
+  color: var(--primary40);
+  text-decoration: none;
+}
+
+.coche-card .boton-editar-coche a.button:hover {
+  background: var(--primary90);
+  border: solid;
+  color: var(--primary60);
+}
+
+.coche-card .orden-coche {
+  color: var(--primary30);
+  border-radius: .8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: calc(var(--espacioTarjeta) / 2);
+  padding-left: 1.6rem;
+  padding-right: 1.6rem;
+  background: var(--primary90);
+}
+
+.coche-card .orden-coche span {
+  font-weight: bold;
+  padding-left: .8rem;
+}
+.coche-card .footer-card {
+  font-size: 1.4rem;
+  padding: var(--espacioTarjeta);
+
+  padding-top: 0;
+  text-align: center;
+}
+/*Fin tarjetas coches*/
+
+
+/*Landscape*/
+body.orientation-landscape .section-listado-coches,
+body.orientation-landscape aside.buscador.visible {
+  padding-left: 10rem;
+}
+
+body.orientation-landscape aside.buscador {
+  width: 0;
+  height: 100vh;
+  bottom: initial;
+  top: 0;
+  transition: all .2s ease-out;
+}
+
+body.orientation-landscape aside.buscador.visible {
+  bottom: initial;
+  height: 100vh;
+  width: 100%;
+  top: 0;
+  transition: all .2s ease-in;
+}
+
+@media (min-width:420px) {
+  .coche-card .logo-container.circular {
+    flex: 0 0 5.4rem;
+  }
+  
+  .coche-card .logo-container.horizontal {
+    flex: 0 0 7rem;
+  }
+  
+  .coche-card .logo-container.horizontal_largo {
+    flex: 0 0 6.2rem;
+  }
+  
+  .coche-card .logo-container.vertical {
+    flex: 0 0 6rem;
+  }
+  
+  .coche-card .logo-container.vertical_largo {
+    flex: 0 0 4rem;
+  }
+
+  .coche-card .marca-modelo,
+.coche-card .cantidad {
+  font-size: 2rem;
+  
+}
+
+.coche-card .version,
+.coche-card .text-precio {
+  font-size: 1.6rem;
+
+}
+
+.coche-card .text-precio {
+  padding-top: .4rem;
+}
+
+.coche-card .info-card li {
+  font-size: 1.5rem;
+}
+
+.coche-card .info-card li i {
+  font-size: 2rem;
+}
+
+}
+
+@media (min-width:600px) {
+
+  .logged-in aside.buscador,
+  .logged-in aside.buscador.scrolled_logged-in {
+    height: calc(100% - 19.8rem);
+    height: calc(100% - (var(--altura-barraInferior) + var(--altura-WpAdminBaryHeader)));
+  }
+
+/*Tarjetas coches 600px*/
+  .coche-card {
+    max-width: 60rem;
+   /* margin-left: 0;
+    margin-right: 0; */
+  }
+
+   .coche-card a.link-coche {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .coche-card .portada-container {
+    flex: 0 0 300px;
+    height: 100%;
+    padding: 1.6rem;
+     order: 1;
+    align-self: end;
+    padding-top: 0;
+    padding-bottom: 1.6rem;
+    padding-left: .6rem;
+    overflow: hidden;
+  }
+  .coche-card img.portada_coche {
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1.4rem;
+    
+  }
+  .coche-card .info-card {
+   flex: 1;
+    /* ajusta este valor para cambiar el ancho del contenedor info-card */
+  }
+
+  .coche-card .header-card {
+    order: -1;
+    width: 100%;
+    padding: var(--espacioTarjeta);
+    padding-top: calc((var(--espacioTarjeta)) + .6rem);
+    padding-bottom: calc((var(--espacioTarjeta)) + .6rem);
+  }
+  .coche-card .info-card ul {
+    /*height: 100%; 
+    align-content: center;
+    justify-content: end;
+    align-items: start;
+    padding: 0;*/
+
+  }
+
+  .coche-card .info-card li {
+    font-size: 1.4rem;
+  }
+
+  .coche-card .info-card li i {
+    font-size: 1.8rem;
+}
+
+  .coche-card .overlay-etiqueta_medioambiental {
+    top:2.8rem;
+    right: 2.8rem;
+  }
+
+ 
+  .coche-card .titulo-coche-card {
+    margin-left: 1.6rem;
+    margin-right: 1.6rem;
+  }
+
+  .coche-card .version, .coche-card .text-precio {
+    /*line-height: 1.8 ; */
+  }
+
+  /*.coche-card .marca-modelo, .coche-card .cantidad {
+    font-size: 2.2rem;
+    
+  } */
+
+}
+
+@media (min-width:783px) {
+  .logged-in aside.buscador, 
+  .logged-in aside.buscador.scrolled_logged-in {
+    height: calc(100% - 18.4rem);
+    height: calc(100% - var(--altura-WpAdminBaryHeader) - var(--altura-barraInferior));
+  }
+:root {
+
+}
+
+/*Tarjetas coches 783px*/
+
+.section-listado-coches {
+  display: flex;
+  flex-direction: column;
+flex: 1;
+}
+
+
+  .section-listado-coches .contenedor-coches {
+    display: grid;
+    gap: var(--tarjetaMargin);
+    grid-template-columns: 1fr 1fr;
+    margin: 0 auto;
+    max-width: calc(80rem + var(--tarjetaMargin) + (var(--espacioPadding) * 2));
+  }
+
+  .coche-card {
+    max-width: 400px;
+    margin-bottom: 0;
+  }
+
+  .coche-card a.link-coche {
+    /*display: block; */
+  }
+
+  .coche-card .portada-container {
+    height: initial;
+    padding: 0;
+    order: 0;
+  }
+
+  .coche-card img.portada_coche {
+    height: auto;
+    object-fit: initial;
+    border-radius: 0;
+  }
+
+  .coche-card .header-card {
+    order: 0;
+  }
+
+
+  .coche-card .overlay-etiqueta_medioambiental {
+    top: var(--espacioTarjeta);
+    right: var(--espacioTarjeta);
+    height: 4rem;
+  width: 4rem;
+  }
+
+}
+
+@media (min-width: 1080px) {
+
+  main.main-listado {
+    display: flex;
+    padding-top: 0;
+  }
+
+.ordenar_por {
+  padding-left: 0;
+  padding-right: calc(var(--wrapper-padding) + var(--espacioTarjeta));
+  position: sticky;
+  padding-top: var(--posicionTop);
+  top: var(--altura-breadcrumbsYheader);
+  z-index: 1;
+  transition: all .2s ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  width: fit-content;
+  align-self: end;
+  padding-top: var(--espacioTarjeta);
+  width: 100%;
+  padding-left: calc(var(--interior-grid) + var(--espacioTarjeta));
+}
+
+.ordenar_por .facetwp-selections {
+width: 100%;
+padding-right: 2.4rem; /*VAR GAP */
+
+}
+
+.ordenar_por .facetwp-selections ul {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ordenar_por .facetwp-selections ul li {
+  
+  margin-right: 1.6rem;
+  height: 4.2rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1.6rem;
+  /* box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); */
+  width: fit-content;
+  font-size: 1.6rem;
+  padding-left: .2rem;
+
+  justify-content: center;
+  
+padding-left: .8rem;
+ 
+  border-radius: 0.8rem;
+  background: var(--neutral98);
+ 
+  border: solid 1px var(--primary70);
+
+    cursor: pointer;
+    background: var(--primary30);
+    color: var(--primary90);
+    padding-left: 1.6rem;
+    padding-right: .8rem;
+}
+
+.ordenar_por .facetwp-selections ul li span.facetwp-selection-value::after {
+  content: '\e937';
+  display: inline-flex;
+  width: 2.4rem;
+  height: 2.4rem;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  margin-right: 0;
+  font-family: 'icons_plantilla360';
+  font-size: 2rem;
+  display: inline-flex;
+  width: fit-content;
+  transition: all .1s ease-in ;
+  -webkit-transition: all .1s ease-in ;
+  -moz-transition: all .1s ease-in ;
+  -ms-transition: all .1s ease-in ;
+  -o-transition: all .1s ease-in ;
+  align-items: center;
+}
+
+.ordenar_por .facetwp-selections ul li span.facetwp-selection-value:hover::after,
+.ordenar_por .facetwp-selections ul li span.facetwp-selection-value:hover
+ { color: var(--ref--error--error40); transition: all.3s ease-in-out; -webkit-transition: all.3s ease-in-out; -moz-transition: all.3s ease-in-out; -ms-transition: all.3s ease-in-out; -o-transition: all.3s ease-in-out;
+  color: var(--ref--error--error60);
+}
+
+.facetwp-selection-value {
+  display: flex;
+  align-items: center;
+  margin-right: 1.6rem;
+  height: 100%;
+  padding-left: 0;
+  padding-right: 0;
+  border-radius: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  -ms-border-radius: 0;
+  -o-border-radius: 0;
+}
+
+.facetwp-selection-label::before {
+  display: none;
+}
+
+
+.facetwp-selection-label {
+  font-weight: bold;
+ margin-right: 2rem;
+}
+
+
+.ordenar_por .fs-label-wrap {
+  color: var(--primary98);
+  background: var(--primary50);
+  /*height:3.2rem;*/
+  height: 4.2rem;
+  width: fit-content;
+  font-size: 1.6rem;
+  padding-left: .2rem;
+align-items: center;
+justify-content: center;
+display: flex;
+border-radius: 1.2rem;
+/*border: solid .08rem;*/
+border: none;
+border-radius: 0.8rem;
+background: var(--neutral98);
+color: var(--neutral20);
+    border: solid 1px var(--neutral70);
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.ordenar_por .fs-label-wrap .fs-label {
+  margin-right: 1.2rem;
+  display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ordenar_por .fs-label::before{
+  font-family: 'icons_plantilla360' !important;
+  content: "\e94d";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  margin-right: .8rem;
+  font-size: 2rem;
+  display: none;
+}
+
+.ordenar_por .fs-label-wrap .fs-arrow {
+  border-top-color: var(--primary50);
+  right: 1.6rem;
+  
+}
+
+.ordenar_por .fs-dropdown {
+  border-radius: .8rem;
+  padding: 1.6rem;
+  margin-top: 1.6rem;
+  width: 30rem;
+  right: 0;
+  border: none;
+
+}
+
+.ordenar_por .fs-wrap {
+  width: fit-content;
+}
+
+/*.logged-in .ordenar_por{
+    top: calc(var(--altura-breadcrumbsYheader) + var(--altura-WpAdminBar));
+} */
+
+
+
+  aside.buscador {
+    position: sticky;
+    top: 7.2rem;
+    bottom: initial;
+    height: calc(100vh - var(--altura-breadcrumbsYheader));
+    top: var(--altura-breadcrumbsYheader);
+    /*transition: all .4s ease-in;*/
+    transition: none;
+    z-index: 1;
+    padding-right: 0;
+    width: 36rem;
+    padding-top: var(--posicionTop);
+    padding-bottom: var(--posicionTop);
+    /*padding-left: var(--wrapper-padding); */
+    padding-left: 3.2rem;
+    padding-left: var(--wrapper-padding);
+    width: 34%;
+    padding:0;
+    width: 32rem;
+    overflow: visible;
+  }
+aside.buscador .wrapper-buscador {
+  border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  border: solid 1px var(--primary80);
+  border: none;
+  padding-left: var(--espacioTarjeta);
+  padding-left: var(--wrapper-padding);
+  padding-right: .8rem;
+  /*min-width: calc( 32rem - var(--wrapper-padding) ); */
+}
+
+
+aside.buscador::before  {
+
+    content: '';
+    display: block;
+    background: var(--neutral90);
+    width: 100%;
+    position: absolute;
+    top: -48px;
+    height: 8rem;
+    background: var(--neutral95);
+    border-top-right-radius: 4rem;
+}
+
+
+.wrapper-cerrar-buscador {
+  padding-top: 0;
+  padding-right: 0;
+}
+
+  aside.buscador .wrapper-buscador .contenido-buscador {
+    padding-right: 4rem;
+  padding-left: 0;
+  height: calc(100% - 2.4rem);
+ 
+  padding-right: 3.2rem;
+  width: 100%;
+  height: calc(100% - 3.2rem);
+  }
+  
+  .facetwp-reset {
+    margin-right: 0;
+  }
+
+  .facetwp-facet-boton_reiniciar,
+  .facetwp-facet-boton_reiniciar .facetwp-reset{
+width: 100%;
+
+  }
+
+  .facetwp-facet-boton_reiniciar {
+    position: sticky;
+  z-index: 9999999;
+  bottom: 0;
+  }
+
+  .facetwp-facet-boton_reiniciar .facetwp-reset{
+    border-radius: 0.8rem;
+  }
+
+  .logged-in aside.buscador,
+  .logged-in .ordenar_por {
+    top: calc(var(--altura-breadcrumbsYheader) + var(--altura-WpAdminBar));
+  }
+
+  .logged-in aside.buscador, .logged-in aside.buscador.scrolled_logged-in {
+    height: calc(100vh - var(--altura-header) - var(--altura-breadcrumbs) - var(--altura-WpAdminBar));
+  }
+
+
+  aside.buscador.hidden-breadcrumb{
+   top: var(--altura-header);
+   height: calc(100vh - var(--altura-header));
+   transition: all .1s ease-out;
+   -webkit-transition: all .1s ease-out;
+   -moz-transition: all .1s ease-out;
+   -ms-transition: all .1s ease-out;
+   -o-transition: all .1s ease-out;
+}
+
+.ordenar_por.hidden-breadcrumb{
+top: var(--altura-header);
+}
+
+  .logged-in aside.buscador.hidden-breadcrumb {
+    top: var(--altura-WpAdminBaryHeader);
+    height: calc(100vh - var(--altura-header) - var(--altura-WpAdminBar));
+  }
+
+  .logged-in .ordenar_por.hidden-breadcrumb {
+    top: var(--altura-WpAdminBaryHeader);
+  }
+
+  .barra-filtros,
+  .barra-filtros-inside {
+      display: none !important;
+  }
+
+  .boton-cierre {
+    display: none;
+  }
+  
+  /*Estilo tarjeta coches*/
+  .coche-card .marca-modelo, .coche-card .cantidad {
+    font-size: 1.9rem;
+  }
+
+
+  .coche-card .version, .coche-card .text-precio {
+    font-size: 1.4rem;
+  }
+
+
+ 
+
+  .coche-card .cantidad .symbol {
+    font-size: 1.4rem;
+  }
+
+  .coche-card .info-card li  {
+    font-size: 1.4rem;
+    height: initial;
+  }
+
+  .coche-card .logo-container.circular {
+    flex: 0 0 4.2rem;
+  }
+
+  .coche-card .logo-container.horizontal {
+    flex: 0 0 5rem;
+  }
+
+  .coche-card .logo-container.horizontal_largo {
+    flex: 0 0 5.2rem;
+  }
+
+  .facetwp-facet-marcas .facetwp-checkbox,
+  .select-marcas .selected-option span {
+    font-size: 1.4rem;
+  }
+  .select-marcas .selected-option {
+    height: 3.2rem;
+  }
+
+  .h3-wrapper-filtros h3 {
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+  
+  .h3-wrapper-filtros i {
+    font-size: 2rem;
+  }
+  .section-listado-coches .contenedor-coches {
+    padding-left: 4rem;
+    padding-left: var(--interior-grid);
+    padding-top: var(--tarjetaMargin);
+    
+  }
+  .section-listado-coches .intro {
+    padding-top: 3.2rem;
+    padding-left: var(--interior-grid);
+    padding-top: 8rem;
+    color: var(--neutral40) !important;
+  }
+
+  .section-listado-coches .contenedor-coches {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+
+
+
+@media (min-width:1280px) {
+  aside.buscador {
+    width: 36%;
+  }
+}
+
+@media (min-width:1360px) {
+  aside.buscador {
+    width: 38%;
+  }
+
+ 
+  
+}
+
+@media (min-width:1440px){
+ 
+
+  aside.buscador {
+    width: 36%;
+  }
+}
+
+@media (min-width: 1600px) {
+  aside.buscador {
+    width: 42rem;
+  }
+
+  .section-listado-coches .contenedor-coches {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 1740px) {
+  aside.buscador {
+    width: 48rem;
+  }
+}
+
+@media (min-width: 1920px) {
+
+ 
+
+  main.main-listado {
+padding-top: 8rem;
+padding-top: 0;
+  }
+
+  .section-listado-coches .intro {
+    padding-left: 8rem;
+    padding-top: 2.4rem;
+    
+  } 
+ aside.buscador {
+  padding-left: var(--wrapper-padding);
+
+  
+  width: 52rem;
+    min-width: 54rem;
+   padding: 0;
+   transition: all 1.6s ease-out;
+ }
+
+ aside.buscador .wrapper-buscador {
+  padding-left: var(--wrapper-padding);
+ }
+
+ aside.buscador .wrapper-buscador .contenido-buscador {
+ padding-right: 3.2rem;
+ width: 100%;
+}
+
+
+ .section-listado-coches .contenedor-coches {
+  padding-right: var(--wrapper-padding);
+  gap: 3.2rem;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin: 0;
+    max-width: 100%;
+    width: 100%;
+    padding-left: 4.8rem;
+    padding-top: 4rem;
+ }
+
+ 
+
+ .section-listado-coches .intro .tenemos,
+.section-listado-coches .intro .texto-stock {
+  line-height: 6.4rem;
+  font-size: 5.7rem;
+  letter-spacing: -0.025rem; 
+  /*DISPLAY LARGE*/
+}
+
+.introduccion {
+line-height: 3.6rem;
+  font-size: 2.8rem;
+  letter-spacing: 0;
+  font-weight: 400;
+  max-width: 100rem;
+color: var(--neutral50);
+  /*Headline medium*/
+  color: var(--neutral35);
+}
+
+/*Tarjetas*/
+.coche-card .cantidad {
+
+}
+.coche-card .cantidad .symbol {
+  font-size: 1.8rem;
+  font-weight: normal;
+  
+}
+
+
+.coche-card .marca-modelo {
+  font-size: 1.8rem
+}
+
+.coche-card .version {
+  font-size: 1.6rem;
+}
+
+.coche-card .text-precio {
+  font-size: 1.3rem;
+  /*color: var(--primary50); */
+    text-align: right;
+    font-weight: normal;
+}
+
+.coche-card .info-card li {
+  font-size: 1.4rem;
+}
+.coche-card .info-card li i {
+  font-size: 2rem;
+    color: var(--neutral-variant70);
+}
+
+  .coche-card:hover .portada_principal_coche {
+    transform: scale(1.09);
+
+  }
+  .coche-card .logo-container.circular {
+    flex: 0 0 4.8rem;
+  }
+
+}
+
+@media (min-width: 2000px) {
+  aside.buscador {
+    width: 32%;
+  }
+}
+
+
+  @media (min-width: 2200px) {
+    aside.buscador {
+      width: 32%;
+    }
+}
+
+@media (min-width:2360px) {
+  aside.buscador {
+    width: 28%;
+  }
+
+  .section-listado-coches .contenedor-coches {
+        gap: 2.4rem;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  }
+
+  @media (min-width:2800px) {
+    aside.buscador {
+      width: 32%;
+    }
+
+    .section-listado-coches .contenedor-coches {
+      gap: 3.2rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+  }
+
+  @media (min-width: 3200px) {
+    aside.buscador {
+      width: 34%;
+    }
+  }
+
+  @media (min-width: 3600px) {
+    aside.buscador {
+      width: 28%;
+    }
+
+    .section-listado-coches .contenedor-coches {
+      gap: 4rem;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+  }
