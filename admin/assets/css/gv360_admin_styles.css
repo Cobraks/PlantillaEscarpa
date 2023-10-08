@@ -1,0 +1,91 @@
+body.admin_concesionario #toplevel_page_wpseo_workouts {
+    display: none;
+}
+
+#marca_edit .categorychecklist-holder{
+    max-height: 100%;
+}
+
+#marca_edit img {
+width: 32px !important;
+margin-right: 8px;
+max-height: 32px;
+}
+
+#marca_edit ul.acf-checkbox-list{
+    display: flex;
+    flex-wrap: wrap;
+}
+#marca_edit ul.acf-radio-list li, ul.acf-checkbox-list li {
+   margin: 4px !important;
+}
+
+#marca_edit ul.acf-checkbox-list li label {
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--neutral90);
+    padding: 8px 10px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+#marca_edit ul.acf-checkbox-list li label:hover {
+    background: var(--primary70);
+}
+
+#marca_edit ul.acf-checkbox-list li input[type="radio"]{
+    display: none;
+}
+
+#marca_edit  ul.acf-checkbox-list li span {
+    display:flex;
+    align-items: center;
+    justify-content:center;
+}
+
+#marca_edit ul.acf-checkbox-list li label.selected { 
+    border: solid 1px var(--primary50);
+    background: var(--primary90);
+    font-weight: bold;
+    color: var(--primary30);
+}
+
+#marca_edit ul.acf-checkbox-list li label.selected::after {
+    content: '\e930';
+    margin-left: 8px;
+    font-family: 'icons_plantilla360';
+    font-size: 20px;
+    display: inline-block;
+}
+
+#show_add_modelo_button {
+    margin-top: 12px;
+    height: 32px;
+    padding-left: 10px;
+    padding-right: 16px;
+    background: var(--primary90);
+    border: solid 1px var(--primary20);
+    border-radius: 8px;
+    color: var(--primary40);
+    width: 100%;
+}
+
+/*Estilos pestañas */
+.edit-post-visual-editor .acf-fields > .acf-tab-wrap {
+    background: var(--primary50) !important;
+    position: sticky;
+    top: 0;
+    padding-bottom: 10px;
+    box-shadow: 0 8px 10px 1px rgba(0,0,0,.03),0 3px 14px 2px rgba(0,0,0,.07),0 5px 5px -3px rgba(0,0,0,.06);
+}
+
+.edit-post-visual-editor .acf-fields > .acf-tab-wrap:first-child .acf-tab-group {
+    border: none;
+}
